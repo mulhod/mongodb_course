@@ -11,7 +11,7 @@ if __name__ == '__main__':
 
     # Let's get all the unique names first
     names = list((students.find({}, {'name': 1, '_id': 0})))
-    names = [name['name'] for name in names]
+    names = set([name['name'] for name in names])
 
     # Now, iterate over all names, getting all entries corresponding to each
     # name and then we can all homeworks
