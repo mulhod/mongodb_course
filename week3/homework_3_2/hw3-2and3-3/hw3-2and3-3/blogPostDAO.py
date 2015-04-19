@@ -55,6 +55,7 @@ class BlogPostDAO:
         # now insert the post
         try:
             # XXX HW 3.2 Work Here to insert the post
+            self.posts.insert_one(post)
             print "Inserting the post"
         except:
             print "Error inserting post"
@@ -65,9 +66,8 @@ class BlogPostDAO:
     # returns an array of num_posts posts, reverse ordered
     def get_posts(self, num_posts):
 
-        cursor = []         # Placeholder so blog compiles before you make your changes
-
         # XXX HW 3.2 Work here to get the posts
+        cursor = self.posts.find().limit(num_posts)
 
         l = []
 
@@ -89,7 +89,7 @@ class BlogPostDAO:
     # find a post corresponding to a particular permalink
     def get_post_by_permalink(self, permalink):
 
-        post = None
+        post = self.posts.find_one({'permalink': permalink})
         # XXX Work here to retrieve the specified post
 
         if post is not None:
@@ -107,10 +107,14 @@ class BlogPostDAO:
             comment['email'] = email
 
         try:
-            last_error = {'n':-1}           # this is here so the code runs before you fix the next line
             # XXX HW 3.3 Work here to add the comment to the designated post
-
-            return last_error['n']          # return the number of documents updated
+            query = {'permalink': permalink}
+            comments_doc = self.posts.find_one(query)
+            comments = comments_doc['comments']
+            comments.append(comment)
+            result = self.posts.update_one({'permalink': permalink},
+                                           {'$set': {'comments': comments}})
+            return result.matched_count          # return the number of documents updated
 
         except:
             print "Could not update the collection, error"
