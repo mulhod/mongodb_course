@@ -4,3 +4,4 @@
   - Week 1 - No notebook for this week
   - [Week 2](http://nbviewer.ipython.org/github/mulhod/mongodb_course/blob/master/week2/PyMongo_week2.ipynb)
   - [Week 3](http://nbviewer.ipython.org/github/mulhod/mongodb_course/blob/master/week3/PyMongo_week3.ipynb)
+  - [Week 4](http://nbviewer.ipython.org/github/mulhod/mongodb_course/blob/master/week4/PyMongo_week4.ipynb)
